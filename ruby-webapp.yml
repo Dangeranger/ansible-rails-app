@@ -1,9 +1,12 @@
 ---
 - hosts: all
-  user: root
+  sudo: yes
   vars_files:
     - vars/defaults.yml
-    
+  tasks:
+    - name: Updates apt cache
+      action: apt update_cache=true
+
   roles:
     - webserver
     - database

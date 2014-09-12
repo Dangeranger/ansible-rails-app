@@ -8,7 +8,7 @@
   command: rm -rf /etc/nginx/sites-enabled/default
 
 - name: Remove the app's symlink, if exists
-  command: rm -rf /etc/nginx/sites-enabled/ilikeyoureally  
+  command: rm -rf /etc/nginx/sites-enabled/ilikeyoureally
 
 - name: Configure nginx for the app
   template: src=etc_nginx_sites-available_ilikeyoureally.conf.j2 dest=/etc/nginx/sites-available/ilikeyoureally group=www-data owner=www-data force=yes

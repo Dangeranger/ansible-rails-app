@@ -1,18 +1,29 @@
 - name: Install python-pycurl
   apt: pkg=python-pycurl state=latest
-  
+
+- name: Install python-psycopg2
+  apt: pkg=python-psycopg2 state=latest
+
 - name: Add PostgreSQL repo key
   apt_key: url=http://apt.postgresql.org/pub/repos/apt/ACCC4CF8.asc
-  
+
 - name: Add PostgreSQL repo
   apt_repository: repo='deb http://apt.postgresql.org/pub/repos/apt/ precise-pgdg main'
 
 - name: Install PostgreSQL
   apt: pkg=postgresql-9.3 state=latest update_cache=true
-  
+
+- name: Create database for application
+  action: postgresql_db name=NRPortal_staging
+  sudo_user: postgres
+
+- name: Create db user for deploy unix login user
+  action: postgresql_user name=deploy  password=password db=NRPortal_staging role_attr_flags=CREATEDB,NOSUPERUSER
+  sudo_user: postgres
+
 - name: Copy valid pg_hba.conf
   template: src=pg_hba.conf.j2 dest=/etc/postgresql/9.3/main/pg_hba.conf
-  
+
 - name: Copy valid postgresql.conf
   template: src=postgresql.conf.j2 dest=/etc/postgresql/9.3/main/postgresql.conf
 

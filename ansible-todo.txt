@@ -1,0 +1,23 @@
+nginx
+Puma (jungle)
+Ruby 2.0.0-p247   -> 2.1.2
+PostgreSQL
+memcached ?
+Redis
+God
+shared config files
+change password for deploy
+
+==================
+
+Issue rundown
+
+-- no postgres app db
+    - creae the app db with the postgres_db ansible module
+-- no postgres user for the app
+    - create the app user with the postgres_user ansible module
+-- postgres app user could not log in using an md5 password
+    - configure pg_hba.conf to accept
+-- app user didn't have permission to restart nginx
+    - configure visudo
+-- nginx
