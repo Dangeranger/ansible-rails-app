@@ -5,7 +5,7 @@ deploy_directory: /webapps/mywebapp
 app_name: mywebapp
 
 env:
-  RAILS_ENV: production
+  RAILS_ENV: staging
 
 ## stolen from https://github.com/jgrowl/ansible-playbook-ruby-from-src
 rubyTmpDir: /usr/local/src

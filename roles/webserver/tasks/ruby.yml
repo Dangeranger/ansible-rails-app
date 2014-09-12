@@ -54,3 +54,6 @@
 
 - name: Install Bundler
   command: gem install bundler
+
+- name: Install God monitoring
+  command: gem install god

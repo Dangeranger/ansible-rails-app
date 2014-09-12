@@ -20,4 +20,10 @@ Issue rundown
     - configure pg_hba.conf to accept
 -- app user didn't have permission to restart nginx
     - configure visudo
--- nginx
+    - add 'deploy      ALL=(ALL) NOPASSWD:/etc/init.d/nginx,/etc/init.d/postgresql,/usr/sbin/service' to visudo
+-- make sure to run "service nginx restart" without sudo
+    - don't prefix 'sudo' ahead of commands to servce ...
+-- god not installaed
+    - add line to the ruby role with command: gem install god
+-- bundle is not installing all the gems we need
+    - wrong env? not configured to run in env?
