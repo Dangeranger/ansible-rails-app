@@ -53,7 +53,7 @@
   command: make install chdir={{tmpRubyPath}} creates=/usr/local/bin/ruby
 
 - name: Install Bundler
-  command: gem install bundler
+  action: gem name=bundler state=latest
 
 - name: Install God monitoring
-  command: gem install god
+  action: gem name=god state=latest

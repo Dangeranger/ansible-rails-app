@@ -14,6 +14,9 @@
 - name: Create deployment directory
   file: path=/webapps/{{ app_name }} owner=deploy group=deploy state=directory
 
+- name: Create puma tmp directory
+  file: path=/webapps/{{ app_name }}/shared/tmp/puma owner=deploy group=deploy state=directory
+
 - name: Add puma runner
   template: src=usr_local_bin_run-puma.j2 dest=/usr/local/bin/run-puma force=yes mode=755
 

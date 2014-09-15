@@ -1,12 +1,12 @@
 upstream {{ app_name }} {
-  server unix:///tmp/puma_{{ app_name }}.sock;
+  server unix:///webapps/{{ app_name }}/shared/tmp/sockets/puma.sock;
 }
 
 server {
   gzip on;
   listen 80;
 
-  gzip_types text/plain text/html text/css application/x-javascript text/xml application/xml application/xml+rss text/javascript application/json;                                                                      
+  gzip_types text/plain text/html text/css application/x-javascript text/xml application/xml application/xml+rss text/javascript application/json;
   server_name {{ webserver_name }};
   root {{ deploy_directory }}/current/public;
 
@@ -14,13 +14,13 @@ server {
     proxy_pass http://{{ app_name }}; # match the name of upstream directive which is defined above
     proxy_set_header Host $host;
     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-  }  
+  }
 
   location ~* \.(js|css|png|jpg|jpeg|gif|ico)$ {
     expires 1y;
     log_not_found off;
   }
-  
+
   location ~ ^/(assets|images|javascripts|stylesheets|swfs|system)/ {
     gzip_static on;
     expires     max;
@@ -29,5 +29,5 @@ server {
     add_header  ETag "";
 
     break;
-  }  
+  }
 }
