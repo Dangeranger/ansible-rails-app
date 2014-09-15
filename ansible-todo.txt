@@ -25,5 +25,9 @@ Issue rundown
     - don't prefix 'sudo' ahead of commands to servce ...
 -- god not installaed
     - add line to the ruby role with command: gem install god
+-- puma not running
+    - make sure that puma gem in installed in using bundler
+    - configure puma
 -- bundle is not installing all the gems we need
-    - wrong env? not configured to run in env?
+    - make sure to point deploy/vagrant to correct feature branch
+
