@@ -27,7 +27,7 @@ Issue rundown
     - add line to the ruby role with command: gem install god
 -- puma not running
     - make sure that puma gem in installed in using bundler
-    - configure puma
+    - configure puma, this ia  a PITA
 -- bundle is not installing all the gems we need
     - make sure to point deploy/vagrant to correct feature branch
 
