@@ -3,7 +3,7 @@
 webserver_name: mywebapp.vagrant
 deploy_directory: /webapps/mywebapp
 app_name: mywebapp
-ansible_ssh_private_key: /Users/Joshua/.vagrant.d/insecure_private_key
+ansible_ssh_private_key: /path/to/your/.vagrant.d/insecure_private_key
 
 aws_access_key_id: ACCESS
 aws_secret_access_key: SECRET
