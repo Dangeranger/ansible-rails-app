@@ -25,6 +25,8 @@ CONFIG=/etc/puma.conf
 JUNGLE=`cat $CONFIG`
 RUNPUMA=/usr/local/bin/run-puma
 
+export RAILS_ENV=vagrant   # TODO: DONT DO THIS
+
 # Load the VERBOSE setting and other rcS variables
 . /lib/init/vars.sh
 
@@ -68,10 +70,13 @@ do_start_one() {
 }
 
 do_start_one_do() {
-  log_daemon_msg "--> Woke up puma $1"
-  log_daemon_msg "user $2"
-  log_daemon_msg "log to $4"
-  start-stop-daemon --verbose --start --chdir $1 --chuid $2 --background --exec $RUNPUMA -- $1 $3 $4
+  app=$1
+  user=$2
+  config=$3
+  log=$4
+  log_daemon_msg "--> Starting puma $app"
+  log_daemon_msg "user=$user config=$config log=$log"
+  start-stop-daemon --verbose --start --chdir $app --chuid $user --background --exec $RUNPUMA -- "$app" "$config" "$log"
 }
 
 #
@@ -164,13 +169,14 @@ do_status_one() {
   i=`grep $1 $CONFIG`
   dir=`echo $i | cut -d , -f 1`
 
+  (cd $1; bundle exec pumactl --state $dir/tmp/puma/state stats)
   if [ -e $PIDFILE ]; then
-    log_daemon_msg "--> About to status puma $1"
-    pumactl --state $dir/tmp/puma/state stats
-    # kill -s USR2 `cat $PIDFILE`
+    log_daemon_msg "--> About to status puma for $1"
+    pid=`cat $PIDFILE`
+    # kill -s USR2 $pid
     # TODO Check if process exist
   else
-    log_daemon_msg "--> $1 isn't there :(..."
+    log_daemon_msg "--> $PIDFILE isn't there :(..."
   fi
 	return 0
 }
