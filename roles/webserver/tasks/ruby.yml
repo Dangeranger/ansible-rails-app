@@ -1,4 +1,3 @@
----
 # Ruby from source playbook (https://github.com/jgrowl/ansible-playbook-ruby-from-src)
 - name: upgrade
   action: apt update_cache=yes upgrade=yes
@@ -53,7 +52,5 @@
   command: make install chdir={{tmpRubyPath}} creates=/usr/local/bin/ruby
 
 - name: Install Bundler
-  action: gem name=bundler state=latest
-
-- name: Install God monitoring
-  action: gem name=god state=latest
+  command: gem install bundler creates=/usr/local/bin/bundle
+  sudo: yes

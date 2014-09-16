@@ -1,0 +1,15 @@
+- name: Create puma tmp directory
+  file: path=/webapps/{{app_name}}/shared/tmp/puma owner=deploy group=deploy mode=775 state=directory
+
+- name: Add puma runner
+  template: src=usr_local_bin_run-puma.j2 dest=/usr/local/bin/run-puma force=yes mode=755
+
+- name: Add puma init script
+  template: src=etc_init_d_puma.j2 dest=/etc/init.d/puma force=yes mode=755
+
+- name: Copy puma init config
+  template: src=etc_puma.conf.j2 dest=/etc/puma.conf force=yes mode=644
+
+- name: Add puma to upstart
+  command: update-rc.d -f puma defaults
+

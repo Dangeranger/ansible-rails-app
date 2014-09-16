@@ -10,4 +10,3 @@
   roles:
     - webserver
     - database
-    - sidekiq

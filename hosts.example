@@ -1,5 +1,5 @@
 [webserver]
-ansible.example.com ansible_ssh_user=vagrant ansible_ssh_private_key_file=/path/to/vagrat/insecure_private_key
+mywebapp.vagrant ansible_ssh_user=vagrant ansible_ssh_private_key_file=/path/to/vagrant/insecure_private_key
 
 [database]
-ansible.example.com ansible_ssh_user=vagrant ansible_ssh_private_key_file=/path/to/vagrat/insecure_private_key
+mywebapp.vagrant ansible_ssh_user=vagrant ansible_ssh_private_key_file=/path/to/vagrant/insecure_private_key

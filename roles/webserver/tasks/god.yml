@@ -1,0 +1,2 @@
+- name: Install God
+  action: gem name=god state=latest

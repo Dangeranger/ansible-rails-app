@@ -1,11 +1,14 @@
 ## webapp
 
-webserver_name: mywebapp.com
+webserver_name: mywebapp.vagrant
 deploy_directory: /webapps/mywebapp
 app_name: mywebapp
 
+aws_access_key_id: ACCESS
+aws_secret_access_key: SECRET
+
 env:
-  RAILS_ENV: staging
+  RAILS_ENV: vagrant
 
 ## stolen from https://github.com/jgrowl/ansible-playbook-ruby-from-src
 rubyTmpDir: /usr/local/src
