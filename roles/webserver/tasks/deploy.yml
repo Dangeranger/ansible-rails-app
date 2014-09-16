@@ -10,5 +10,9 @@
         password=$6$rounds=100000$7m4ktYhPWkCm940L$Na2t0YAS/M0BLg146EH/Rk6oE/fdoLkgOVEbv.oW2xZ9XLN0vJQN369ij2Y5nqa2r7w.FWKWAa7qGZNNPZkxb1
         comment="Application deployment user"
 
+- name: Add deploy user to sudoers file
+#  lineinfile: "dest=/etc/sudoers state=present regexp='^%wheel' line='%wheel ALL=(ALL) NOPASSWD: ALL'"
+  lineinfile: "dest=/etc/sudoers state=present regexp='^%wheel' line='deploy      ALL=(ALL) NOPASSWD:/etc/init.d/nginx,/etc/init.d/postgresql,/usr/sbin/service'"
+
 - name: Create deployment directory
   file: path=/webapps/{{app_name}} owner=deploy group=deploy state=directory
