@@ -1,0 +1,11 @@
+- name: Create capistrano shared dir
+  file: state=directory path=/webapps/{{app_name}}/shared/config force=yes recurse=yes mode=755 owner=deploy
+
+- name: Add shared config files
+  template: src=config_{{item}}.j2 dest=/webapps/{{app_name}}/shared/config/{{item}} force=yes mode=755 owner=deploy group=deploy
+  with_items:
+    - database.yml
+    - fog.yml
+    - ftp_secrets.yml
+
+

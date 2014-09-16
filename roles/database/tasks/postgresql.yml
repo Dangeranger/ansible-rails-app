@@ -14,11 +14,11 @@
   apt: pkg=postgresql-9.3 state=latest update_cache=true
 
 - name: Create database for application
-  action: postgresql_db name=NRPortal_staging
+  action: postgresql_db name={{app_name}}_{{env.RAILS_ENV}}
   sudo_user: postgres
 
 - name: Create db user for deploy unix login user
-  action: postgresql_user name=deploy  password=password db=NRPortal_staging role_attr_flags=CREATEDB,NOSUPERUSER
+  action: postgresql_user name=deploy password=password db={{app_name}}_{{env.RAILS_ENV}} role_attr_flags=CREATEDB,NOSUPERUSER
   sudo_user: postgres
 
 - name: Copy valid pg_hba.conf
