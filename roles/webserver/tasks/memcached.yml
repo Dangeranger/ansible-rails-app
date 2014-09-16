@@ -1,2 +1,2 @@
 - name: Install memcached
-  apt: pkg=nginx state=latest
+  apt: pkg=memcached state=latest

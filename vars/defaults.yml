@@ -1,6 +1,6 @@
 ## webapp
 
-webserver_name: mywebapp.com
+webserver_name: mywebapp.vagrant
 deploy_directory: /webapps/mywebapp
 app_name: mywebapp
 

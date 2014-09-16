@@ -1,4 +1,6 @@
 - include: ruby.yml tags=ruby
 - include: nginx.yml tags=nginx
-- include: deploy.yml tags=deploy
+- include: redis.yml tags=redis
 - include: memcached.yml tags=memcached
+- include: deploy.yml tags=deploy
+- include: puma.yml tags=deploy

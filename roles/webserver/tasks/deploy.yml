@@ -1,31 +1,14 @@
 - name: Install app dependencies
-  action: apt pkg={{ item }} state=installed
+  action: apt pkg={{item}} state=installed
   with_items:
-    - libpq-dev
-    - nodejs
+    - libpq-dev          # needed for postgres client
+    - nodejs             # needed for asset pipeline
 
-# TODO change password for production,
-# the crypted password below is just 'password'
+# TODO change password for production, the crypted password below is just 'password'
 - name: Create deployment user
   user: name=deploy
         password=$6$rounds=100000$7m4ktYhPWkCm940L$Na2t0YAS/M0BLg146EH/Rk6oE/fdoLkgOVEbv.oW2xZ9XLN0vJQN369ij2Y5nqa2r7w.FWKWAa7qGZNNPZkxb1
         comment="Application deployment user"
 
 - name: Create deployment directory
-  file: path=/webapps/{{ app_name }} owner=deploy group=deploy state=directory
-
-- name: Create puma tmp directory
-  file: path=/webapps/{{ app_name }}/shared/tmp/puma owner=deploy group=deploy mode=775 state=directory
-
-- name: Add puma runner
-  template: src=usr_local_bin_run-puma.j2 dest=/usr/local/bin/run-puma force=yes mode=755
-
-- name: Add puma init script
-  template: src=etc_init_d_puma.j2 dest=/etc/init.d/puma force=yes mode=755
-
-- name: Copy puma init config
-  template: src=etc_puma.conf.j2 dest=/etc/puma.conf force=yes mode=644
-
-- name: Add puma to upstart
-  command: update-rc.d -f puma defaults
-
+  file: path=/webapps/{{app_name}} owner=deploy group=deploy state=directory
