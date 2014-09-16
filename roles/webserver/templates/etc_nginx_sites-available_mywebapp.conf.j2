@@ -1,5 +1,5 @@
 upstream {{ app_name }} {
-  server unix:///webapps/{{ app_name }}/shared/tmp/sockets/puma.sock;
+  server unix:///webapps/{{ app_name }}/current/tmp/sockets/puma.socket;
 }
 
 server {

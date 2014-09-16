@@ -23,6 +23,7 @@
     - libxml2-dev
     - libxslt1-dev
     - curl
+    - vim
 
 - name: Install app dependencies
   action: apt pkg={{item}} state=installed

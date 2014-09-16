@@ -28,6 +28,7 @@ Issue rundown
 -- puma not running
     - make sure that puma gem in installed in using bundler
     - configure puma, this ia  a PITA
+    - longer writeup in the README
 -- bundle is not installing all the gems we need
     - make sure to point deploy/vagrant to correct feature branch
 
