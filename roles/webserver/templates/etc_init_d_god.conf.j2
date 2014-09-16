@@ -1,0 +1,69 @@
+#!/bin/bash
+#
+# god       Startup script for god (http://god.rubyforge.org)
+#
+# chkconfig: 2345 85 15
+# description: God is a monitoring framework written in Ruby.
+#
+# based on:
+# http://ryansch.blogspot.com/2011/01/god-process-monitoring-init-script.html
+
+# Put this at /etc/init.d/god
+# run: sudo chmod +x /etc/init.d/god
+# run: sudo update-rc.d god defaultswhi
+
+. /etc/rc.d/init.d/functions
+
+RETVAL=0
+prog="god"
+CONF="/etc/god/master.conf"
+PID_FILE="/var/run/god/god.pid" ; mkdir -p `dirname $PID_FILE`
+LOG_FILE="/var/log/god.log"
+GOD="/usr/local/bin/god"
+# RUBY="/usr/local/rvm/rubies/ruby-2.1.2/bin/ruby" problems due to RVM wrappers
+
+# echo "in init.d/god: PATH=$PATH"
+# rvm info
+
+# Go no further if config file is missing.
+[ -e "$CONF" ] || (echo "missing $CONF"; failure)
+
+start()
+{
+  echo -n $"Starting $prog: "
+  $GOD -c "$CONF" -P "$PID_FILE" -l "$LOG_FILE" --log-level "debug" && success || failure
+  RETVAL=$?
+  echo
+}
+
+stop()
+{
+  echo -n $"Stopping $prog: "
+  ($GOD terminate || kill `cat $PID_FILE`) && success || failure
+  RETVAL=$?
+  echo
+}
+
+case "$1" in
+    start)
+      start
+    ;;
+    stop)
+      stop
+    ;;
+    restart)
+      stop
+      start
+    ;;
+    status)
+      $GOD status
+      status -p "$PID_FILE" $prog
+      RETVAL=$?
+    ;;
+    *)
+      echo "Usage: $prog {start|stop|restart|status}"
+      exit 1
+    ;;
+esac
+
+exit $RETVAL

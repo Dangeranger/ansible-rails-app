@@ -53,5 +53,5 @@
   command: make install chdir={{tmpRubyPath}} creates=/usr/local/bin/ruby
 
 - name: Install Bundler
-  command: gem install bundler creates=/usr/local/bin/bundle
+  command: gem install bundler creates=/usr/local/bin/bundler
   sudo: yes
