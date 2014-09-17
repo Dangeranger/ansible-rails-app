@@ -4,6 +4,9 @@
 - name: Add god init script
   template: src=etc_init_d_god.conf.j2 dest=/etc/init.d/god force=yes mode=755
 
+- name: Create dir for god/master.conf
+  file: path=/etc/god recurse=yes state=directory
+
 - name: Copy god init config
   template: src=etc_god_master.conf.j2 dest=/etc/god/master.conf force=yes mode=644
 
