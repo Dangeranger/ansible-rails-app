@@ -13,9 +13,8 @@
 - name: Set deployment users shell to Bash
   command: "chsh -s /bin/bash deploy"
 
-- name: Add deploy user to sudoers file
-#  lineinfile: "dest=/etc/sudoers state=present regexp='^%wheel' line='%wheel ALL=(ALL) NOPASSWD: ALL'"
-  lineinfile: "dest=/etc/sudoers state=present regexp='^%wheel' line='deploy      ALL=(ALL) NOPASSWD:/etc/init.d/nginx,/etc/init.d/postgresql,/usr/sbin/service'"
+- name: Copy sudoers file
+  template: src=etc_sudoers.j2 dest=/etc/sudoers validate='visudo -cf %s'
 
 - name: Create deployment directory
   file: path=/webapps/{{app_name}} owner=deploy group=deploy recurse=yes state=directory
